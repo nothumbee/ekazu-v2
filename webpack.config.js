@@ -1,10 +1,12 @@
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-
-// const autoprefixer = require("autoprefixer");
 const path = require("path");
+const { equals } = require("ramda");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const autoprefixer = require("autoprefixer");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const _module = {
   rules: [
@@ -114,12 +116,26 @@ const _module = {
   ],
 };
 
-const plugins = [
-  // new BundleAnalyzerPlugin({analyzerMode: "static"}),
+const plugins = mode => [
+  new BundleAnalyzerPlugin({
+    analyzerMode: isProductionMode(mode) ? false : "server",
+    analyzerPort: 7567,
+  }),
   new CleanWebpackPlugin(),
   new HtmlWebPackPlugin({
     template: "./public/index.html",
     filename: "./index.html",
+  }),
+  new MomentLocalesPlugin({
+    localesToKeep: ["cs"],
+  }),
+  new CopyPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, "public/_redirects"),
+        to: path.resolve(__dirname, "dist"),
+      },
+    ],
   }),
   // new webpack.LoaderOptionsPlugin({
   //   options: {
@@ -129,12 +145,14 @@ const plugins = [
   new webpack.HotModuleReplacementPlugin(),
 ];
 
+const isProductionMode = equals("production");
+
 module.exports = (env, options) => ({
   mode: options.mode,
   optimization: {
     usedExports: true,
   },
-  devtool: "inline-source-map",
+  devtool: isProductionMode(options.mode) ? false : "inline-source-map",
   entry: {
     index: "./src/index.js",
   },
@@ -145,7 +163,7 @@ module.exports = (env, options) => ({
     path: path.resolve(__dirname, "dist"),
   },
   module: _module,
-  plugins,
+  plugins: plugins(options.mode),
   resolve: {
     extensions: [".js", ".jsx"],
   },

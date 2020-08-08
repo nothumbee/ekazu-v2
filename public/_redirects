@@ -1,0 +1,2 @@
+# redirect all reqs to index.html because of React router
+/*    /index.html   200
