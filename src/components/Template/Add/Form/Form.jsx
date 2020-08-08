@@ -14,7 +14,7 @@ const TemplateAddForm = () => {
     console.log("adding data", data);
 
     message.success("Šablona úspěšně nahrána.");
-    history.push(ADMIN_SHOW_TEMPLATE_LIST);
+    // history.push(ADMIN_SHOW_TEMPLATE_LIST);
 
     // const validData = validateOutcomingData(data, "add");
     // axe

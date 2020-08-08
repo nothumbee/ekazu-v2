@@ -1,42 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Input, Form } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import FormContext from "../../../context";
 
 const InputGroup = Input.Group;
 
 const ItemsInput = ({ id }) => {
-  const context = useContext(FormContext);
-
-  const { getFieldValue, setFieldsValue } = context;
-
-  const itemsField = `${id}.keys`;
-
-  const handleAddItem = () => {
-    const keys = getFieldValue(itemsField);
-    const count = keys.length;
-    const newItemId = keys[count - 1] + 1;
-    const nextKeys = keys.concat(newItemId);
-
-    setFieldsValue({
-      [itemsField]: nextKeys,
-    });
-  };
-
-  const handleRemoveItem = item => {
-    const keys = getFieldValue(itemsField);
-    if (keys.length === 1) {
-      return;
-    }
-
-    setFieldsValue({
-      [itemsField]: keys.filter(key => key !== item),
-    });
-  };
-
-  const method = getFieldValue("method");
-  const setOnChange = method === "duplicate" || method === "edit";
-
   return (
     <InputGroup>
       <Form.List name={[id[id.length - 1], "text"]}>

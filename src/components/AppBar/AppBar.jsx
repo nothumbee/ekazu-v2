@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
 import { Menu, Layout } from "antd";
 import styled from "styled-components";
 import {
@@ -110,7 +109,3 @@ const AppBar = ({ authUser = true }) => {
 };
 
 export default AppBar;
-
-AppBar.propTypes = {
-  authUser: PropTypes.bool.isRequired,
-};

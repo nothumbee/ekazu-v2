@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "antd";
 import axe from "../../helpers/Axios";
 import Group from "./Group";
 import { HeartBeat } from "../Loading";
-import DiagnosisGuessForm from "../Diagnosis/Guess";
+import DiagnosisGuessForm from "../Diagnosis/Guess/Form";
 
 const { Title } = Typography;
 
@@ -125,7 +125,8 @@ const Groups = () => {
 
   useEffect(() => {
     axe.get("student").then(response => {
-      console.log(response.data);
+      console.log("RRRRRRR", response.data);
+      // TODO prepare backend to return similar res to initial state
       // setCard(response.data);
       setTimeout(() => {
         setLoading(false);
@@ -141,7 +142,6 @@ const Groups = () => {
       {card.groups.map(group => (
         <Group key={group.id} group={group} />
       ))}
-
       <DiagnosisGuessForm caseID={card.id} />
     </>
   );

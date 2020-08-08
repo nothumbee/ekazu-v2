@@ -7,8 +7,14 @@
   ],
   "plugins": [
     "prettier",
-    "react"
+    "react",
+    "import"
   ],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/self-closing-comp": "error",
+    "react/prop-types": 0
+  },
   "parserOptions": {
     "ecmaVersion": 11,
     "sourceType": "module",
@@ -17,11 +23,8 @@
       "modules": true
     }
   },
-  "rules": {
-    "prettier/prettier": "error"
-  },
   "env": {
     "browser": true,
     "node": true
-}
+  }
 }

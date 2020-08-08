@@ -2,7 +2,6 @@ import React, { useRef, useContext, useState } from "react";
 import { List, Card, Form } from "antd";
 import { MinusCircleOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 
-import immutablySwapItems from "../../../helpers/arraySwap";
 import FormContext from "../context";
 import GeneratorAddForm from "./AddForm";
 import GeneratorSingle from "./Single";
@@ -100,7 +99,7 @@ const GeneratorsList = ({ id, actions }) => {
                     />
                   </List.Item>
                 )}
-              ></List>
+              />
             </>
           );
         }}

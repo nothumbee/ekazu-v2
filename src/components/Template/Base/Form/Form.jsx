@@ -5,7 +5,6 @@ import RequiredFields from "../RequiredFields/RequiredFields";
 import TitleInput from "../Inputs/Helpers/TitleInput";
 import FormContext from "../../context";
 import axe from "../../../../helpers/Axios";
-import withMaybe from "../../../HOC/withMaybe";
 import { HeartBeat } from "../../../Loading";
 import GroupsList from "../../Groups/List";
 import "./Form.scss";
@@ -42,7 +41,7 @@ const TemplateBaseForm = props => {
 
   return (
     <>
-      <Loading loading={loading} />
+      {loading ? <HeartBeat /> : null}
       <Card>
         <Title level={2}>Přidání šablony</Title>
         <Form
@@ -67,9 +66,6 @@ const TemplateBaseForm = props => {
     </>
   );
 };
-
-const isLoadingConditionFn = props => !props.loading;
-const Loading = withMaybe(isLoadingConditionFn)(HeartBeat);
 
 export default TemplateBaseForm;
 

@@ -1,2 +1,1 @@
-import ScreensRoot from "./Root";
-export default ScreensRoot;
+export { default } from "./Root";
