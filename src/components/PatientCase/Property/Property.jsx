@@ -4,7 +4,7 @@ import { Button } from "antd";
 import useExam from "../../../hooks/useExam";
 import { ExaminingModal } from "../../Loading";
 import * as TYPES from "../../Template/Generators/generatorTypes";
-import { Images, Range, Text } from "./types";
+import { Images, Range, Text } from "./Types";
 
 const Property = ({ property, visible: override = false }) => {
   const [{ visible, examining }, { handleExaminate, setVisible }] = useExam(override);
