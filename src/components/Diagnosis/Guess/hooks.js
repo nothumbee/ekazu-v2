@@ -1,4 +1,4 @@
-import axe from "../../../helpers/Axios";
+import axe from "../../../helpers/axios";
 import React, { useState, useEffect } from "react";
 
 export const useHandleFinishCase = ({ caseID, exams, handleSuccess }) => {

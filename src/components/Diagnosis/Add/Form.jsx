@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Card, Alert, message } from "antd";
-import axe from "../../../helpers/Axios";
+import axe from "../../../helpers/axios";
 import { ADMIN_SHOW_DIAGNOSIS_LIST } from "../../../constants/routes";
 import { useHistory } from "react-router";
 

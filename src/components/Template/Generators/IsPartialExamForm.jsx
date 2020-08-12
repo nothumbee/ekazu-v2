@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Switch } from "antd";
 import ExamNumberInputs from "../Base/Inputs/Helpers/ExamNumberInputs";
 
-const IsPartialExamForm = ({ id, isPartialExam, handleChange }) => {
-  const name = [id[id.length - 1], "isPartialExam"];
+const IsPartialExamForm = ({ childPath, isPartialExam, handleChange }) => {
+  const name = [...childPath, "isPartialExam"];
   return (
     <>
       <Form.Item
@@ -15,7 +15,7 @@ const IsPartialExamForm = ({ id, isPartialExam, handleChange }) => {
         <Switch onChange={handleChange} />
       </Form.Item>
 
-      {isPartialExam && <ExamNumberInputs id={id} />}
+      {isPartialExam && <ExamNumberInputs childPath={childPath} />}
     </>
   );
 };

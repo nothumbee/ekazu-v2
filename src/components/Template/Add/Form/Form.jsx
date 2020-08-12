@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, message } from "antd";
-import TemplateBaseForm from "../../Base/Form/Form";
+import TemplateBaseForm from "../../Base/Form";
 import { useHistory } from "react-router";
 import { ADMIN_SHOW_TEMPLATE_LIST } from "../../../../constants/routes";
 // import axe from "../../../../helpers/Axios";

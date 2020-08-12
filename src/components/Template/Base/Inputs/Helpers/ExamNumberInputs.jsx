@@ -9,11 +9,11 @@ const examNumberInputs = [
   { name: "price", title: "Cena", value: data.price },
 ];
 
-const ExamNumberInputs = ({ id }) => (
+const ExamNumberInputs = ({ childPath }) => (
   <Row>
     {examNumberInputs.map((input, index) => (
       <Col span={8} key={index}>
-        <CustomNumberInput id={id} name={input.name}>
+        <CustomNumberInput childPath={childPath} name={input.name}>
           {input.title}
         </CustomNumberInput>
       </Col>

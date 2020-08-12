@@ -3,8 +3,13 @@ import FormContext from "../../../context";
 import IsExamCheckbox from "./IsExamCheckbox";
 import ExamNumberInputs from "./ExamNumberInputs";
 
-const IsExamModule = ({ id, isExam: override = false }) => {
-  const fieldPath = [...id, "exam"];
+const IsExamModule = ({
+  path,
+  childPath,
+  isExam: override = false,
+  isChangeTo = false,
+}) => {
+  const fieldPath = [...path, "exam"];
   const { getFieldValue } = useContext(FormContext);
   const [isExam, setIsExam] = useState(getFieldValue(fieldPath) || false);
 
@@ -14,9 +19,12 @@ const IsExamModule = ({ id, isExam: override = false }) => {
 
   return (
     <>
-      {!override && <IsExamCheckbox id={id} handleChange={handleChange} />}
-      {/* <ExamNumberInputs id={id} /> */}
-      {(isExam || override) && <ExamNumberInputs id={id} />}
+      {!override && !isChangeTo ? (
+        <IsExamCheckbox childPath={childPath} handleChange={handleChange} />
+      ) : null}
+      {isExam || override || isChangeTo ? (
+        <ExamNumberInputs childPath={childPath} />
+      ) : null}
     </>
   );
 };

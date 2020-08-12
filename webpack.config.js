@@ -5,7 +5,7 @@ const path = require("path");
 const { equals } = require("ramda");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 // const autoprefixer = require("autoprefixer");
-const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
+// const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const _module = {
@@ -126,9 +126,9 @@ const plugins = mode => [
     template: "./public/index.html",
     filename: "./index.html",
   }),
-  new MomentLocalesPlugin({
-    localesToKeep: ["cs"],
-  }),
+  // new MomentLocalesPlugin({
+  //   localesToKeep: ["cs"],
+  // }),
   new CopyPlugin({
     patterns: [
       {

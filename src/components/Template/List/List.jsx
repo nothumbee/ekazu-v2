@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Collapse, Button, List, Card } from "antd";
 import Title from "antd/lib/typography/Title";
-import axe from "../../../helpers/Axios";
+import axe from "../../../helpers/axios";
 import { ADMIN_EDIT_TEMPLATE, ADMIN_DUPLICATE_TEMPLATE } from "../../../constants/routes";
 import "./List.scss";
 

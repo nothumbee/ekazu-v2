@@ -4,6 +4,7 @@ import { MinusCircleOutlined, DownOutlined, UpOutlined } from "@ant-design/icons
 import GeneratorsList from "../Generators/List";
 import GroupAddButton from "./AddButton";
 
+// TODO possibly add collapse (what will be in header?)
 const GroupsList = ({ loading = false }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -18,7 +19,8 @@ const GroupsList = ({ loading = false }) => {
                 return (
                   <GeneratorsList
                     key={field.key}
-                    id={["groups", field.name]}
+                    path={["groups", field.name]}
+                    childPath={[field.name]}
                     actions={[
                       <MinusCircleOutlined
                         className='dynamic-delete-button'

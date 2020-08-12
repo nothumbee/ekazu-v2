@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Form, Input } from "antd";
 import "./helpers.scss";
 
-const TitleInput = ({ id }) => {
-  const name = id ? [id[id.length - 1], "title"] : "title";
+const TitleInput = ({ childPath, isChangeTo }) => {
+  const name = childPath ? [...childPath, "title"] : "title";
   return (
     <Form.Item
       label='Název'
@@ -17,7 +17,7 @@ const TitleInput = ({ id }) => {
         },
       ]}
     >
-      <Input />
+      <Input disabled={isChangeTo} />
     </Form.Item>
   );
 };

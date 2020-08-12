@@ -3,8 +3,8 @@ import { Form, Input } from "antd";
 import PropTypes from "prop-types";
 import "./helpers.scss";
 
-const UnitInput = ({ id }) => {
-  const name = [id[id.length - 1], "unit"];
+const UnitInput = ({ childPath }) => {
+  const name = [...childPath, "unit"];
   return (
     <Form.Item
       label='Jednotka'

@@ -8,18 +8,11 @@
     // [
     //   "import",
     //   {
-    //     "libraryName": "antd",
-    //     "style": true
+    //     "libraryName": "@ant-design/icons",
+    //     "libraryDirectory": "es/icons",
+    //     "camel2DashComponentName": false
     //   },
-    //   "antd"
-    // ],
-    // [
-    //   "import",
-    //   {
-    //     "libraryName": "@ant-design",
-    //     "libraryDirectory": "icons"
-    //   },
-    //   "antd-icons"
+    //   "@ant-design/icons"
     // ]
   ]
 }

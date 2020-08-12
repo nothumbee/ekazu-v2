@@ -3,10 +3,10 @@ import { Upload, Form, message, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import FormContext from "../../../context";
-import axe from "../../../../../helpers/Axios";
+import axe from "../../../../../helpers/axios";
 import { assocPath } from "ramda";
 
-const ImageGroupInput = ({ id }) => {
+const ImageGroupInput = ({ path, childPath }) => {
   const context = useContext(FormContext);
   const { setFieldsValue, getFieldValue } = context;
 
@@ -23,8 +23,8 @@ const ImageGroupInput = ({ id }) => {
   const afterUploadFile = filename => {
     console.log("afterUploadFile", filename);
     const formVals = getFieldValue();
-    const images = getFieldValue([...id, "imageGroup"]) || [];
-    const someTing = assocPath([...id, "imageGroup"], [...images, filename])(formVals);
+    const images = getFieldValue([...path, "imageGroup"]) || [];
+    const someTing = assocPath([...path, "imageGroup"], [...images, filename])(formVals);
     setFieldsValue(someTing);
   };
 
@@ -56,13 +56,13 @@ const ImageGroupInput = ({ id }) => {
     console.log("file", file);
   };
 
-  const name = [id[id.length - 1], "imageGroup"];
+  const name = [...childPath, "imageGroup"];
 
   return (
     <>
       <Form.Item noStyle>
         <Form.Item name={name} fieldKey={name} noStyle>
-          <span></span>
+          <span />
         </Form.Item>
       </Form.Item>
       <Form.Item label='Fotky'>

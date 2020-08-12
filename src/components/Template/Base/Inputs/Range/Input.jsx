@@ -12,7 +12,11 @@ const rangeNumberInputs = [
   { name: "max", title: "Maximum" },
 ];
 
-const RangeInput = ({ id, isPartialExam }) => {
+const RangeInput = ({ isPartialExam, path, childPath, isChangeTo }) => {
+  const props = {
+    childPath,
+    path,
+  };
   return (
     <Card
       style={{
@@ -22,29 +26,29 @@ const RangeInput = ({ id, isPartialExam }) => {
         boxShadow: "0px 0px 10px #eee",
         margin: "20px 0px",
       }}
-      title={<TitleInput id={id} />}
+      title={<TitleInput {...props} isChangeTo={isChangeTo} />}
     >
       <InputGroup className='range'>
-        {!isPartialExam && <IsExamModule id={id} />}
+        {!isPartialExam ? <IsExamModule {...props} isChangeTo={isChangeTo} /> : null}
         <Row gutter={16}>
-          <RangeNumberInputs id={id} />
+          <RangeNumberInputs {...props} />
         </Row>
       </InputGroup>
     </Card>
   );
 };
 
-const RangeNumberInputs = ({ id }) => (
+const RangeNumberInputs = ({ childPath }) => (
   <>
     {rangeNumberInputs.map((input, index) => (
       <Col span={8} key={index}>
-        <CustomNumberInput id={id} name={input.name}>
+        <CustomNumberInput childPath={childPath} name={input.name}>
           {input.title}
         </CustomNumberInput>
       </Col>
     ))}
     <Col span={8}>
-      <UnitInput id={id} />
+      <UnitInput childPath={childPath} />
     </Col>
   </>
 );

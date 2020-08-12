@@ -4,16 +4,18 @@ import DiagnosisSelect from "../Selects/Diagnosis/Select";
 import RequiredFields from "../RequiredFields/RequiredFields";
 import TitleInput from "../Inputs/Helpers/TitleInput";
 import FormContext from "../../context";
-import axe from "../../../../helpers/Axios";
+import axe from "../../../../helpers/axios";
 import { HeartBeat } from "../../../Loading";
 import GroupsList from "../../Groups/List";
 import "./Form.scss";
+import FormSteps from "./FormSteps";
+import Conditions from "../../Groups/Conditions";
 
 const { Title } = Typography;
 
-const TemplateBaseForm = props => {
+const TemplateBaseForm = ({ data, handleSubmit }) => {
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [diagnosisList, setDiagnosisList] = useState([]);
 
   useEffect(() => {
@@ -22,21 +24,20 @@ const TemplateBaseForm = props => {
       .then(result => {
         setDiagnosisList(result.data);
         setLoading(false);
-        form.setFieldsValue(props.data);
       })
       .catch(err => console.log(err));
   }, []);
 
-  const handleSubmit = values => {
+  const onSubmit = values => {
     console.log("FORM values", values);
 
     // form.validateFields((err, values) => {
     //   if (!err) {
     //     console.log("Received values of form: ", values);
-    //     props.handleSubmit(values);
+    //     handleSubmit(values);
     //   }
     // });
-    props.handleSubmit(values);
+    handleSubmit(values);
   };
 
   return (
@@ -44,22 +45,51 @@ const TemplateBaseForm = props => {
       {loading ? <HeartBeat /> : null}
       <Card>
         <Title level={2}>Přidání šablony</Title>
+
         <Form
           form={form}
           name='template_form'
-          onFinish={handleSubmit}
-          initialValues={props.data}
+          onFinish={onSubmit}
+          initialValues={INITIAL_STATE}
         >
           <FormContext.Provider value={form}>
-            <TitleInput />
-            <DiagnosisSelect diagnosisList={diagnosisList} />
-            <RequiredFields />
-            <GroupsList loading={loading} />
-            <Form.Item wrapperCol={{ span: 12 }}>
-              <Button type='primary' htmlType='submit'>
-                Přidej šablonu
-              </Button>
-            </Form.Item>
+            <FormSteps
+              steps={[
+                {
+                  title: "Základní informace",
+                  content: (
+                    <>
+                      <TitleInput />
+                      <DiagnosisSelect diagnosisList={diagnosisList} />
+                      <RequiredFields />
+                    </>
+                  ),
+                },
+                {
+                  title: "Skupiny vyšetření",
+                  content: <GroupsList loading={loading} />,
+                },
+                {
+                  title: "Podmínky vyšetřování",
+                  content: <Conditions />,
+                },
+              ]}
+              finishButton={
+                // <Form.Item wrapperCol={{ span: 12 }}>
+                <Button
+                  type='primary'
+                  onClick={() => console.log("getFieldValue", form.getFieldValue())}
+                >
+                  Přidej šablonu
+                </Button>
+                // </Form.Item>
+              }
+            />
+            {/* <TitleInput /> */}
+            {/* <DiagnosisSelect diagnosisList={diagnosisList} /> */}
+            {/* <RequiredFields /> */}
+
+            {/* <GroupsList loading={loading} /> */}
           </FormContext.Provider>
         </Form>
       </Card>
@@ -86,110 +116,132 @@ export const INITIAL_STATE = {
         {
           id: "5dbc75587421ec0004754593",
           order: 1,
+          type: "images",
+          title: "Rodinná anamnéza",
+          exam: false,
+          text: [
+            "otec má anginu pectoris, matka zdráva, sourozenci 2 zdraví",
+            "dalsi text",
+          ],
+          imageGroup: null,
+        },
+        {
+          id: "5dbc75587421ec0004754594",
+          order: 2,
+          type: "text",
+          title: "Předchozí vyšetření",
+          exam: true,
+          malus: 0,
+          bonus: 0,
+          price: 0,
+          text: [
+            "otec má anginu pectoris, matka zdráva, sourozenci nejsou :(",
+            "dalsi text",
+          ],
+        },
+        {
+          id: "5dbc75587421ec0004754595",
+          title: "RANGE TEST",
+          order: 3,
+          type: "range",
+          exam: false,
+          text: ["nekuřák, alkohol příležitostně, drogy 0"],
+        },
+        {
+          id: "5dbc75587421ec000475s595",
+          title: "OBRAZKY TEST",
+          order: 4,
+          type: "images",
+          exam: false,
+          text: ["nekuřák, alkohol příležitostně, drogy 0"],
+          imageGroup: ["image.lol"],
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Dalsi infoT",
+      order: 2,
+      isPartialExam: false,
+      generators: [
+        {
+          id: "5dbc75587421ec0004754593",
+          order: 1,
           type: "text",
           title: "Rodinná anamnéza",
           exam: false,
-          // malus: 0,
-          // bonus: 0,
-          // price: 0,
-          text: ["otec má anginu pectoris, matka zdráva, sourozenci 2 zdraví"],
-          // imageGroup: null,
+          text: [
+            "otec má anginu pectoris, matka zdráva, sourozenci 2 zdraví",
+            "dalsi text",
+          ],
+          imageGroup: null,
         },
-        // {
-        //   id: "5dbc75587421ec0004754594",
-        //   order: 2,
-        //   type: "text",
-        //   title: "Předchozí vyšetření",
-        //   exam: false,
-        //   malus: 0,
-        //   bonus: 0,
-        //   price: 0,
-        //   text:
-        //     "běžné dětské nemoci, zápal plic v 10 letech, dosud se neléčí s žádno interní diagnózou, st.p. UCNA l.dx. pro intramurální strikturu močov 12/09, úrazy: naštípnutý ukazováček na PDK.",
-        //   imageGroup: null,
-        // },
-        // {
-        //   id: "5dbc75587421ec0004754595",
-        //   order: 3,
-        //   type: "text",
-        //   title: "RF",
-        //   exam: false,
-        //   malus: 0,
-        //   bonus: 0,
-        //   price: 0,
-        //   text: "nekuřák, alkohol příležitostně, drogy 0",
-        //   imageGroup: null,
-        // },
+        {
+          id: "5dbc75587421ec00047d4593",
+          order: 2,
+          type: "text",
+          title: "Rodinná anamnéza",
+          exam: false,
+          text: [
+            "otec má anginu pectoris, matka zdráva, sourozenci 2 zdraví",
+            "dalsi text",
+          ],
+          imageGroup: null,
+        },
       ],
     },
-    // {
-    //   id: 2,
-    //   title: "???",
-    //   order: 2,
-    //   isPartialExam: false,
-    //   generators: [
-    //     {
-    //       id: "5dbc75587421ec0004754596",
-    //       order: 1,
-    //       type: "images",
-    //       title: "RTG břicha vstoje",
-    //       exam: true,
-    //       malus: 0,
-    //       bonus: 0,
-    //       price: 0,
-    //       text: [
-    //         "Dilatace kliček tenkého střeva na 30 mm, naplněn žaludek tekutinou, v dolní a srední části břicha prakticky chybí plyn, nález může odpovídat incip ileoznímu event. subileosnímu stavu.",
-    //       ],
-    //       imageGroup: null,
-    //     },
-    //   ],
-    // },
-    // {
-    //   id: 3,
-    //   title: "Rozbor krve",
-    //   order: 3,
-    //   isPartialExam: true,
-    //   generators: [
-    //     {
-    //       id: "5dbc75587421ec0004754597",
-    //       order: 1,
-    //       type: "range",
-    //       title: "Leukocyty",
-    //       exam: true,
-    //       unit: "10^9/l",
-    //       malus: 0,
-    //       bonus: 10,
-    //       price: 2000,
-    //       text: null,
-    //       imageGroup: null,
-    //     },
-    //     {
-    //       id: "5dbc75587421ec0004754598",
-    //       order: 2,
-    //       type: "range",
-    //       title: "Hemoglobin",
-    //       exam: true,
-    //       unit: "g/l",
-    //       malus: 10,
-    //       bonus: 0,
-    //       price: 2000,
-    //       text: null,
-    //       imageGroup: null,
-    //     },
-    //     {
-    //       id: "5dbc75587421ec0004754598",
-    //       order: 3,
-    //       type: "exam",
-    //       title: "Rentgen",
-    //       exam: true,
-    //       unit: null,
-    //       malus: null,
-    //       bonus: null,
-    //       price: null,
-    //       text: ["Rentgen vam ukaze"],
-    //       imageGroup: ["url/some.jpg"],
-    //     },
-    //   ],
-    // },
+    {
+      id: 3,
+      title: "Rozbor krve",
+      order: 3,
+      isPartialExam: true,
+      // TODO BE - add check - partial exam can only contain ranges
+      generators: [
+        {
+          id: "5dbc75587421ec0004754597",
+          order: 1,
+          type: "range",
+          min: 23,
+          max: 26.4,
+          title: "Leukocyty",
+          exam: true,
+          unit: "10^9/l",
+          malus: 0,
+          bonus: 10,
+          price: 2000,
+          text: ["dsadasd"],
+          imageGroup: null,
+        },
+        {
+          id: "5dbc75587421ec00047d4598",
+          order: 2,
+          type: "range",
+          min: 2,
+          max: 28.4,
+          title: "Hemoglobin",
+          exam: true,
+          unit: "g/l",
+          malus: 10,
+          bonus: 0,
+          price: 2000,
+          text: ["sd"],
+          imageGroup: null,
+        },
+        {
+          id: "5dbc75587421ec0004754598",
+          order: 3,
+          type: "range",
+          title: "Rentgen",
+          exam: true,
+          unit: null,
+          malus: null,
+          bonus: null,
+          price: null,
+          // FIXME BE - return undefined or nothing for missing values
+          text: undefined,
+          imageGroup: ["url/some.jpg"],
+        },
+      ],
+    },
   ],
 };

@@ -4,10 +4,10 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 const InputGroup = Input.Group;
 
-const ItemsInput = ({ id }) => {
+const ItemsInput = ({ childPath }) => {
   return (
     <InputGroup>
-      <Form.List name={[id[id.length - 1], "text"]}>
+      <Form.List name={[...childPath, "text"]}>
         {(textFields, { add, remove, move }) => {
           return (
             <>

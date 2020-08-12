@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import TemplateBaseForm from "../Base/Form/Form";
-import axe from "../../../helpers/Axios";
+import TemplateBaseForm from "../Base/Form";
+import axe from "../../../helpers/axios";
 import validateIncomingData from "../Validate/Incoming";
 import validateOutcomingData from "../Validate/Outcoming";
 
@@ -12,10 +12,10 @@ const TemplateEditForm = () => {
 
   const handleLoadData = () => {
     if (!data) {
-      axe.get(`/admin/template/${id}`).then(response => {
-        const newData = validateIncomingData(response.data);
-        setData(newData);
-        console.log("VALIDATED EDIT DATA :", validateIncomingData(response.data));
+      axe.get(`/admin/template/${id}`).then(({ data }) => {
+        // const newData = validateIncomingData(data);
+        setData(data);
+        // console.log("VALIDATED EDIT DATA :", validateIncomingData(data));
       });
     }
   };
@@ -28,9 +28,7 @@ const TemplateEditForm = () => {
   };
 
   // load data and send it to base form of add template form
-  return (
-    data && <TemplateBaseForm data={data} handleSubmit={handleSubmit} method='edit' />
-  );
+  return <TemplateBaseForm data={data} handleSubmit={handleSubmit} method='edit' />;
 };
 
 export default TemplateEditForm;

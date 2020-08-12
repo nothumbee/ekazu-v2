@@ -6,7 +6,11 @@ import IsExamModule from "../Helpers/IsExamModule";
 
 const InputGroup = Input.Group;
 
-const SymptomInput = ({ id }) => {
+const SymptomInput = ({ childPath, path, isChangeTo }) => {
+  const props = {
+    childPath,
+    path,
+  };
   return (
     <Card
       style={{
@@ -16,11 +20,11 @@ const SymptomInput = ({ id }) => {
         boxShadow: "0px 0px 10px #eee",
         margin: "20px 0px",
       }}
-      title={<TitleInput id={id} />}
+      title={<TitleInput {...props} isChangeTo={isChangeTo} />}
     >
       <InputGroup className='symptom'>
-        <IsExamModule id={id} />
-        <ItemsInput id={id} />
+        <IsExamModule {...props} isChangeTo={isChangeTo} />
+        <ItemsInput {...props} />
       </InputGroup>
     </Card>
   );

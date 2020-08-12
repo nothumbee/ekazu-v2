@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axe from "../../helpers/Axios";
+import React from "react";
 
 import { Table, Card } from "antd";
 import Title from "antd/lib/typography/Title";
+import useDiagnosisList from "./useDiagnosisList";
 
 const DiagnosisList = () => {
-  const [diagnosisList, setDiagnosisList] = useState([]);
-
-  const loadDiagnosisList = () => {
-    if (!diagnosisList.length)
-      axe
-        .get("/admin/codelist/diagnosis")
-        .then(result => {
-          setDiagnosisList(result.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-  };
-
-  useEffect(loadDiagnosisList, [diagnosisList]);
+  const { diagnosisList } = useDiagnosisList();
 
   const dataSource = diagnosisList.map((diagnosis, index) => ({
     key: index,

@@ -1,3 +1,7 @@
-export const TEXT = "text";
-export const IMAGES = "images";
-export const RANGE = "range";
+const generatorTypes = {
+  TEXT: "text",
+  IMAGES: "images",
+  RANGE: "range",
+};
+
+export default generatorTypes;

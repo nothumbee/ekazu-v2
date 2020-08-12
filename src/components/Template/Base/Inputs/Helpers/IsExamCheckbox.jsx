@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Switch } from "antd";
 import "./helpers.scss";
 
-const IsExamCheckbox = ({ id, handleChange }) => {
-  const name = [id[id.length - 1], "exam"];
+const IsExamCheckbox = ({ childPath, handleChange }) => {
+  const name = [...childPath, "exam"];
 
   return (
     <Form.Item

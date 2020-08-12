@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const axe = axios.create({
   baseURL: "https://kazuistic.herokuapp.com/api/rest/",

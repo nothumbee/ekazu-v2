@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Form, InputNumber } from "antd";
 import "./helpers.scss";
 
-const CustomNumberInput = ({ id, name, children }) => {
-  const fieldName = id ? [id[id.length - 1], name] : name;
+const CustomNumberInput = ({ childPath, name, children }) => {
+  const fieldName = childPath ? [...childPath, name] : name;
   return (
     <Form.Item
       label={children}

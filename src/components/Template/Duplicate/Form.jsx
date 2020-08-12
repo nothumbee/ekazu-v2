@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import TemplateBaseForm from "../Base/Form/Form";
-import axe from "../../../helpers/Axios";
+import TemplateBaseForm from "../Base/Form";
+import axe from "../../../helpers/axios";
 import validateIncomingData from "../Validate/Incoming";
 import validateOutcomingData from "../Validate/Outcoming";
 

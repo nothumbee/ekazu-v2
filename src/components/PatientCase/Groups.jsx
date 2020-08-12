@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "antd";
-import axe from "../../helpers/Axios";
+import axe from "../../helpers/axios";
 import Group from "./Group";
 import { HeartBeat } from "../Loading";
 import DiagnosisGuessForm from "../Diagnosis/Guess/Form";
