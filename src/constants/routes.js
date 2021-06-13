@@ -12,7 +12,11 @@ export const ADMIN_CREATE_DIAGNOSIS = `${ADMIN}/create-diagnosis`;
 export const ADMIN_EDIT_TEMPLATE = `${ADMIN}/edit-template`;
 export const ADMIN_DUPLICATE_TEMPLATE = `${ADMIN}/duplicate-template`;
 
-export const ADMIN_SHOW_TEMPLATE_LIST = `${ADMIN}/show-template-list`;
-export const ADMIN_SHOW_DIAGNOSIS_LIST = `${ADMIN}/show-diagnosis-list`;
+export const ADMIN_TEMPLATE_LIST = `${ADMIN}/template-list`;
+export const ADMIN_DIAGNOSIS_LIST = `${ADMIN}/diagnosis-list`;
+
+export const ADMIN_HISTORY = `${ADMIN}/history`;
 
 export const STUDENT = "/student";
+export const STUDENT_EXAM = `${STUDENT}/exam`;
+export const STUDENT_HISTORY = `${STUDENT}/history`;

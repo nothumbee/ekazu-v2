@@ -1,6 +1,6 @@
 import { addKeys, renameAllProps, filterNullValues, removeAllProps } from "./helpers";
 
-const getGeneratorType = generator => {
+const getGeneratorType = (generator) => {
   if (generator.text) return "text";
   if (generator.min && generator.max) return "range";
   if (generator.imageGroup) return "images";
@@ -13,7 +13,7 @@ const validateIncomingData = (data, method) => {
   // add groupsKeys and generatorsKeys
   const newData = { ...data, groupsKeys: Array.from(Array(data.groups.length).keys()) };
 
-  newData.groups = newData.groups.map(group => ({
+  newData.groups = newData.groups.map((group) => ({
     ...group,
     generatorsKeys: group.generators.map((generator, index) => ({
       id: index,
@@ -23,12 +23,12 @@ const validateIncomingData = (data, method) => {
 
   const setFirst = {
     groupsKeys: Array.from(Array(data.groups.length).keys()),
-    groups: data.groups.map(group => ({
+    groups: data.groups.map((group) => ({
       generatorsKeys: group.generators.map((generator, index) => ({
         id: index,
         type: getGeneratorType(generator),
       })),
-      generators: group.generators.map(generator => {
+      generators: group.generators.map((generator) => {
         if (generator.text)
           return { keys: Array.from(Array(generator.text.length).keys()) };
       }),

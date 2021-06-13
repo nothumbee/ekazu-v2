@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Switch } from "antd";
-import ExamNumberInputs from "../Base/Inputs/Helpers/ExamNumberInputs";
+import ExamNumberInputs from "../Base/Inputs/Exam/ExamNumberInputs";
 
 const IsPartialExamForm = ({ childPath, isPartialExam, handleChange }) => {
   const name = [...childPath, "isPartialExam"];

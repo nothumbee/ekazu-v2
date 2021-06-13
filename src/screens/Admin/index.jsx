@@ -1,19 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 // import { withAuthorization } from "../../components/Session";
 // import { compose } from 'recompose';
 // import { withRouter } from 'react-router';
 
-import * as ROUTES from "../../constants/routes";
-import TemplateAddForm from "../../components/Template/Add/Form/Form";
-import TemplateList from "../../components/Template/List/List";
-import DiagnosisList from "../../components/Diagnosis/List";
-import DiagnosisAddForm from "../../components/Diagnosis/Add/Form";
-import TemplateDuplicateForm from "../../components/Template/Duplicate/Form";
-import TemplateEditForm from "../../components/Template/Edit/Form";
+import TemplateList from "../../components/Template/TemplateList/TemplateList";
+import DiagnosisList from "../../components/Diagnosis/DiagnosisList";
+import DiagnosisAddForm from "../../components/Diagnosis/DiagnosisAddForm";
 import AdminHome from "../../components/Admin";
 import { useLocation } from "react-router";
+import {
+  ADMIN,
+  ADMIN_CREATE_DIAGNOSIS,
+  ADMIN_CREATE_TEMPLATE,
+  ADMIN_DIAGNOSIS_LIST,
+  ADMIN_DUPLICATE_TEMPLATE,
+  ADMIN_EDIT_TEMPLATE,
+  ADMIN_TEMPLATE_LIST,
+} from "../../constants/routes";
+import TemplateAddForm from "../../containers/Templates/TemplateAddForm";
+import TemplateEditForm from "../../containers/Templates/TemplateEditForm";
+import TemplateDuplicateForm from "../../containers/Templates/TemplateDuplicateForm";
 
 const AdminPageBase = () => {
   return <ActionDecision />;
@@ -21,26 +28,27 @@ const AdminPageBase = () => {
 
 const ActionDecision = () => {
   const location = useLocation();
+  console.log("location", location);
   switch (location.pathname) {
-    case ROUTES.ADMIN:
+    case ADMIN:
       return <AdminHome />;
 
-    case ROUTES.ADMIN_CREATE_TEMPLATE:
+    case ADMIN_CREATE_TEMPLATE:
       return <TemplateAddForm />;
 
-    case ROUTES.ADMIN_CREATE_DIAGNOSIS:
+    case ADMIN_CREATE_DIAGNOSIS:
       return <DiagnosisAddForm />;
 
-    case ROUTES.ADMIN_SHOW_TEMPLATE_LIST:
+    case ADMIN_TEMPLATE_LIST:
       return <TemplateList />;
 
-    case ROUTES.ADMIN_SHOW_DIAGNOSIS_LIST:
+    case ADMIN_DIAGNOSIS_LIST:
       return <DiagnosisList />;
 
-    case ROUTES.ADMIN_EDIT_TEMPLATE:
+    case ADMIN_EDIT_TEMPLATE:
       return <TemplateEditForm />;
 
-    case ROUTES.ADMIN_DUPLICATE_TEMPLATE:
+    case ADMIN_DUPLICATE_TEMPLATE:
       return <TemplateDuplicateForm />;
     // edit, delete template, insert as copy of existing template
     default:

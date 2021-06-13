@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography, Button, Tabs } from "antd";
 import { FileTextOutlined, PlusOutlined, DatabaseOutlined } from "@ant-design/icons";
-import * as ROUTES from "../../constants/routes";
+import {
+  ADMIN_CREATE_DIAGNOSIS,
+  ADMIN_CREATE_TEMPLATE,
+  ADMIN_DIAGNOSIS_LIST,
+  ADMIN_TEMPLATE_LIST,
+} from "../../constants/routes";
 
 const { Title, Paragraph } = Typography;
 const TabPane = Tabs.TabPane;
@@ -18,14 +23,14 @@ const AdminHome = () => {
       <Tabs defaultActiveKey='1'>
         <TabPane tab='Šablony' key='1'>
           <div>
-            <Link to={ROUTES.ADMIN_CREATE_TEMPLATE}>
+            <Link to={ADMIN_CREATE_TEMPLATE}>
               <Button type='primary'>
                 <PlusOutlined />
                 Vytvořit šablonu
               </Button>
             </Link>
           </div>
-          <Link to={ROUTES.ADMIN_SHOW_TEMPLATE_LIST}>
+          <Link to={ADMIN_TEMPLATE_LIST}>
             <Button type='primary'>
               <FileTextOutlined /> Zobrazit seznam šablon
             </Button>
@@ -34,14 +39,14 @@ const AdminHome = () => {
 
         <TabPane tab='Diagnózy' key='2'>
           <div>
-            <Link to={ROUTES.ADMIN_CREATE_DIAGNOSIS}>
+            <Link to={ADMIN_CREATE_DIAGNOSIS}>
               <Button type='primary'>
                 <PlusOutlined />
                 Vytvořit diagnózu
               </Button>
             </Link>
           </div>
-          <Link to={ROUTES.ADMIN_SHOW_DIAGNOSIS_LIST}>
+          <Link to={ADMIN_DIAGNOSIS_LIST}>
             <Button type='primary'>
               <DatabaseOutlined /> Zobrazit seznam diagnóz
             </Button>

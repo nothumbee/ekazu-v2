@@ -1,10 +1,11 @@
-import { filter, propEq, map, prop, o, unnest } from "ramda";
+import { filter, propEq, map, prop, compose, chain, identity } from "rambda";
 
+const unnest = chain(identity);
 const filterExams = filter(propEq("exam", true));
-const getExams = o(unnest, map(o(filterExams, prop("generators"))));
+const getExams = compose(unnest, map(compose(filterExams, prop("generators"))));
 
-const getExamOptions = groups =>
-  getExams(groups).map(exam => ({
+const getExamOptions = (groups) =>
+  getExams(groups).map((exam) => ({
     label: exam.title,
     value: exam.id,
   }));

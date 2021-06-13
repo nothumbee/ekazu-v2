@@ -1,4 +1,4 @@
 {
   "watch": "webpack.config.js",
-  "exec": "webpack-dev-server --watch"
+  "exec": "webpack serve --mode=development --hot"
 }

@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Button } from "antd";
-import useExam from "../../../hooks/useExam";
-import { ExaminingModal } from "../../Loading";
-import generatorTypes from "../../Template/Generators/generatorTypes";
+import useExam from "../useExam";
+import { generatorTypes } from "../../Template/Generators/constants";
 import { Images, Range, Text } from "./Types";
+import ExaminingModalLoading from "../../Loading/ExaminingModalLoading";
 
 const Property = ({ property, visible: overrideVisibility = false }) => {
-  const [{ visible, examining }, { handleExaminate, setVisible }] = useExam(
-    overrideVisibility
-  );
+  const [{ visible, examining }, { handleExaminate, setVisible }] =
+    useExam(overrideVisibility);
 
   useEffect(() => {
     if (!property.exam) {
@@ -34,7 +33,7 @@ const Property = ({ property, visible: overrideVisibility = false }) => {
           Provést vyšetření
         </Button>
       )}
-      {examining && <ExaminingModal />}
+      {examining && <ExaminingModalLoading />}
     </>
   );
 };

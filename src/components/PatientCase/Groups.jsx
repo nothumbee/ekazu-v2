@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "antd";
 import axe from "../../helpers/axios";
 import Group from "./Group";
-import { HeartBeat } from "../Loading";
-import DiagnosisGuessForm from "../Diagnosis/Guess/Form";
+import DiagnosisGuessForm from "../Diagnosis/DiagnosisGuessForm";
+import HeartBeatLoading from "../Loading/HeartBeat/HeartBeatLoading";
 
 const { Title } = Typography;
 
@@ -42,9 +42,30 @@ const INITIAL_STATE = {
           malus: 0,
           bonus: 0,
           price: 0,
-          text:
-            "běžné dětské nemoci, zápal plic v 10 letech, dosud se neléčí s žádno interní diagnózou, st.p. UCNA l.dx. pro intramurální strikturu močov 12/09, úrazy: naštípnutý ukazováček na PDK.",
+          text: "běžné dětské nemoci, zápal plic v 10 letech, dosud se neléčí s žádno interní diagnózou, st.p. UCNA l.dx. pro intramurální strikturu močov 12/09, úrazy: naštípnutý ukazováček na PDK.",
           imageGroup: null,
+          conditions: {
+            andExams: [
+              {
+                exam: "5dbc75587421ec0004754594",
+                orExams: ["5dbc75587421ec0004754597"],
+              },
+            ],
+            changesTo: {
+              bonus: 122,
+              exam: true,
+              id: "5dbc75587421ec0004754594",
+              malus: 78,
+              order: 2,
+              price: 8,
+              text: [
+                "otec má anginu pectoris, matka zdráva, sourozenci nejsou :(",
+                "dalsi text",
+              ],
+              title: "Předchozí vyšetření",
+              type: "text",
+            },
+          },
         },
         {
           id: "5dbc75587421ec0004754595",
@@ -124,7 +145,7 @@ const Groups = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axe.get("student").then(response => {
+    axe.get("student").then((response) => {
       console.log("RRRRRRR", response.data);
       // TODO prepare backend to return similar res to initial state
       // setCard(response.data);
@@ -135,11 +156,11 @@ const Groups = () => {
   }, []);
 
   return loading ? (
-    <HeartBeat />
+    <HeartBeatLoading />
   ) : (
     <>
       <Title level={2}>Karta pacienta</Title>
-      {card.groups.map(group => (
+      {card.groups.map((group) => (
         <Group key={group.id} group={group} />
       ))}
       <DiagnosisGuessForm caseID={card.id} />

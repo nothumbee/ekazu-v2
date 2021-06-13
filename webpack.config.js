@@ -1,12 +1,10 @@
-const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const path = require("path");
-const { equals } = require("ramda");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-// const autoprefixer = require("autoprefixer");
-// const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const path = require("path");
+const { equals } = require("rambda");
+// const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 
 const _module = {
   rules: [
@@ -16,7 +14,7 @@ const _module = {
       use: {
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env"],
+          presets: ["@babel/preset-env", "@babel/preset-react"],
           plugins: ["babel-plugin-styled-components"],
         },
       },
@@ -51,8 +49,8 @@ const _module = {
           loader: "postcss-loader",
           options: {
             sourceMap: true,
-            config: {
-              path: ".postcssrc",
+            postcssOptions: {
+              config: path.resolve(__dirname, ".postcssrc"),
             },
           },
         },
@@ -82,6 +80,8 @@ const _module = {
                 "primary-color": "red",
                 "link-color": "#1DA57A",
                 "border-radius-base": "2px",
+                "@form-item-margin-bottom": "12px",
+                // "list-item-padding-sm": 0,
               },
               javascriptEnabled: true,
             },
@@ -116,11 +116,11 @@ const _module = {
   ],
 };
 
-const plugins = mode => [
-  new BundleAnalyzerPlugin({
-    analyzerMode: isProductionMode(mode) ? false : "server",
-    analyzerPort: 7567,
-  }),
+const plugins = (mode) => [
+  // new BundleAnalyzerPlugin({
+  //   analyzerMode: isProductionMode(mode) ? false : "server",
+  //   analyzerPort: 7567,
+  // }),
   new CleanWebpackPlugin(),
   new HtmlWebPackPlugin({
     template: "./public/index.html",
@@ -137,22 +137,17 @@ const plugins = mode => [
       },
     ],
   }),
-  // new webpack.LoaderOptionsPlugin({
-  //   options: {
-  //     postcss: [autoprefixer()],
-  //   },
-  // }),
-  new webpack.HotModuleReplacementPlugin(),
 ];
 
 const isProductionMode = equals("production");
 
 module.exports = (env, options) => ({
   mode: options.mode,
+  target: "web",
   optimization: {
     usedExports: true,
   },
-  devtool: isProductionMode(options.mode) ? false : "inline-source-map",
+  // devtool: isProductionMode(options.mode) ? false : "inline-source-map",
   entry: {
     index: "./src/index.js",
   },

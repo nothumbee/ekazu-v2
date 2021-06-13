@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Select } from "antd";
 import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
-import { dropLast } from "ramda";
+import { dropLast } from "rambda";
 import useFormContext from "./useFormContext";
 import useExamsOptions from "./useExamsOptions";
 import "./ConditionExams.scss";
@@ -22,10 +22,10 @@ const ConditionExams = ({ parentName, path }) => {
         <Select style={{ width: 220 }} options={examOptions} />
       </Form.Item>
       <Form.List name={[parentName, "orExams"]}>
-        {(conditions, { add, remove }) => {
+        {(orExams, { add, remove }) => {
           return (
             <>
-              {conditions.map((field, index) => (
+              {orExams.map((field, index) => (
                 <Form.Item
                   key={field.key}
                   fieldKey={field.fieldKey}

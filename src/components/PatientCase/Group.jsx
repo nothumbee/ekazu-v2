@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Button, List, Typography, Card } from "antd";
-import { ExaminingModal } from "../Loading";
 import Property from "./Property";
-import useExam from "../../hooks/useExam";
+import useExam from "./useExam";
+import ExaminingModalLoading from "../Loading/ExaminingModalLoading";
 
 const { Title } = Typography;
 
@@ -35,14 +35,14 @@ const Group = ({ group }) => {
           size='large'
           bordered
           dataSource={group.properties}
-          renderItem={property => (
+          renderItem={(property) => (
             <List.Item>
               <Property property={property} visible={visible} />
             </List.Item>
           )}
         />
       </StyledCard>
-      {examining && <ExaminingModal />}
+      {examining && <ExaminingModalLoading />}
     </>
   );
 };

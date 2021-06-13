@@ -1,2 +1,2 @@
-import FooterCredits from "./Footer";
+import FooterCredits from "./FooterCredits";
 export default FooterCredits;

@@ -1,5 +1,5 @@
 import React from "react";
-import RoleDecisionForm from "../../components/RoleDecision/Form";
+import RoleDecisionForm from "../../components/RoleDecision/RoleDecisionForm";
 
 const LandingPage = () => {
   return <RoleDecisionForm />;

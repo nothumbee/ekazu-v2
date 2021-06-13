@@ -1,7 +1,8 @@
 import React from "react";
 import useFormContext from "../Base/Inputs/Exam/useFormContext";
 import ExamConditions from "../Base/Inputs/Exam/ExamConditions";
-import { Typography } from "antd";
+import { Typography, Card } from "antd";
+import { inputCardStyles } from "../Base/Inputs/constants";
 
 const { Title } = Typography;
 
@@ -10,10 +11,15 @@ const Conditions = () => {
   const formState = getFieldValue();
   return (
     <div>
-      {formState?.groups.map((group, groupIndex) =>
-        group?.generators.map((generator, generatorIndex) =>
+      {formState?.groups?.map((group, groupIndex) =>
+        group?.generators?.map((generator, generatorIndex) =>
           generator?.exam ? (
-            <React.Fragment key={generator.id}>
+            <Card
+              style={{
+                ...inputCardStyles,
+              }}
+              key={generator.id}
+            >
               <Title level={4}>{generator.title}</Title>
               <ExamConditions
                 generator={generator}
@@ -26,7 +32,7 @@ const Conditions = () => {
                   "conditions",
                 ]}
               />
-            </React.Fragment>
+            </Card>
           ) : null
         )
       )}

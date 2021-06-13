@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Input, Form, Button, Modal, Divider } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import ConditionExams from "./ConditionExams";
-import GeneratorSingle from "../../../Generators/Single";
+import GeneratorSingle from "../../../Generators/GeneratorSingle";
 import useFormContext from "./useFormContext";
-import { assocPath } from "ramda";
+import { assocPath } from "rambda";
 
 // TODO pridat moznost ulozeni rozpracovane kazuistiky
 const ExamConditions = ({ path, childPath, generator }) => {
@@ -14,6 +14,8 @@ const ExamConditions = ({ path, childPath, generator }) => {
   const setDefaultChangesTo = () => {
     const formState = getFieldValue();
     const newState = assocPath([...path, "changesTo"], generator)(formState);
+    console.log("formState", formState);
+    console.log("newState", newState);
     setFieldsValue(newState);
   };
 
@@ -25,12 +27,20 @@ const ExamConditions = ({ path, childPath, generator }) => {
     <Input.Group>
       <Form.List name={[...childPath, "andExams"]}>
         {(conditions, { add, remove }) => {
-          // TODO implement remove method
           return (
             <>
               {conditions.map((field, index) => (
                 <React.Fragment key={field.key}>
-                  <Divider>Podmínka {index + 1}</Divider>
+                  <Divider>
+                    Podmínka {index + 1}{" "}
+                    <MinusCircleOutlined
+                      className='dynamic-delete-button'
+                      style={{ margin: "0 8px" }}
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    />
+                  </Divider>
                   <ConditionExams index={index} path={path} parentName={field.name} />
                 </React.Fragment>
               ))}
@@ -78,7 +88,7 @@ const ExamConditions = ({ path, childPath, generator }) => {
               [...changesToPath, "bonus"],
             ])
               .then(() => setIsModalOpen(false))
-              .catch(info => {
+              .catch((info) => {
                 console.log("Validate Failed:", info);
               });
           }}

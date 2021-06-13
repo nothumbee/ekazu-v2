@@ -16,9 +16,9 @@ const validateOutcomingData = (data, method) => {
   }
 
   // This strips group data, we need to keep them
-  newData.groups = newData.groups.map(group => ({
+  newData.groups = newData.groups.map((group) => ({
     ...group,
-    generators: group.generators.map(generator =>
+    generators: group.generators.map((generator) =>
       removeProp("id", removeProp("keys", generator))
     ),
   }));

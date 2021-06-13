@@ -51,3 +51,6 @@ Pages .-mapPage
 Visual modifiers -small -lg
 
 State modifiers = usually only utility function --active, --disabled, --hidden
+
+
+DONE udelat kompaktnejsi design

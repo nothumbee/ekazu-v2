@@ -1,5 +1,5 @@
 import React, { useState, memo } from "react";
-import { Steps, Button, message } from "antd";
+import { Steps, Button } from "antd";
 import "./FormSteps.scss";
 
 const { Step } = Steps;
@@ -8,8 +8,12 @@ const FormSteps = ({ steps = [], finishButton }) => {
   const [current, setCurrent] = useState(0);
   return (
     <div>
-      <Steps current={current} style={{ marginBottom: "1rem" }}>
-        {steps.map(item => (
+      <Steps
+        current={current}
+        className='FormSteps'
+        onChange={(step) => setCurrent(step)}
+      >
+        {steps.map((item) => (
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>

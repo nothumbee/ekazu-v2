@@ -1,0 +1,135 @@
+.RoleDecisionForm {
+  min-height: calc(100vh - 64px);
+  display: flex;
+}
+
+.RoleDecisionForm-wrapper {
+  text-align: center;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.RoleDecisionForm-item {
+  border-radius: 40px;
+  width: 290px;
+  height: 339px;
+  background: #fff;
+  display: inline-block;
+  text-align: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  transition: all 300ms;
+  margin: 0 20px;
+  animation: fly 1s ease;
+}
+
+.RoleDecisionForm-text {
+  font-size: 22px;
+  color: #001529;
+  font-weight: 300;
+}
+
+.RoleDecisionForm-title {
+  font-size: 30px;
+  margin: 0 0 30px 0;
+  color: #333;
+  font-weight: 400;
+  animation: opacity 2s;
+}
+
+.RoleDecisionForm-illustration,
+.up {
+  transition: all 300ms;
+}
+
+.RoleDecisionForm-illustration:hover {
+  transform: scale(1.1);
+}
+
+.RoleDecisionForm-illustration:hover .up {
+  transform: translateY(-5px);
+}
+
+.RoleDecisionForm-illustration .eye {
+  animation: blink 3s ease-out 1s infinite;
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+.RoleDecisionForm-rightVawe {
+  position: absolute;
+  right: 0;
+  animation: flyRightVawe 1s;
+}
+
+.RoleDecisionForm-leftVawe {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  animation: flyLeftVawe 1s;
+}
+
+@keyframes fly {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes flyRightVawe {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes flyLeftVawe {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: scaleY(1);
+  }
+
+  5% {
+    transform: scaleY(0.5);
+  }
+
+  10% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
