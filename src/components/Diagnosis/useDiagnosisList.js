@@ -6,10 +6,10 @@ const useDiagnosisList = () => {
   const loadDiagnosisList = () => {
     axe
       .get("/admin/codelist/diagnosis")
-      .then(result => {
+      .then((result) => {
         setDiagnosisList(result.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
