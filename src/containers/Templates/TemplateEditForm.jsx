@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TemplateBaseForm from "../../components/Template/Base/Form";
 import axe from "../../helpers/axios";
-import validateIncomingData from "../../components/Template/validate/Incoming";
-import validateOutcomingData from "../../components/Template/validate/Outcoming";
+// import validateIncomingData from "../../components/Template/validate/incoming";
+// import validateOutcomingData from "../../components/Template/validate/outcoming";
 
 const TemplateEditForm = () => {
   const [data, setData] = useState(null);
