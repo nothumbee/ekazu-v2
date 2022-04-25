@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { Menu, Layout } from "antd";
+import { Menu, Layout, Space } from "antd";
 import styled from "styled-components";
 import {
   LoginOutlined,
@@ -12,26 +12,13 @@ import {
 } from "@ant-design/icons";
 import * as ROUTES from "../../constants/routes";
 import Logo from "./logo.svg";
+import useAuth from "../Auth/hooks/useAuth";
 
 const { SubMenu } = Menu;
 const MenuItemGroup = Menu.ItemGroup;
 
-const StyledHeader = styled(Layout.Header)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const StyledLogo = styled(Logo)`
-  height: 40px;
-`;
-
-const StyledLogoLink = styled(Link)`
-  display: flex;
-  align-items: center;
-`;
-
-const Header = ({ authUser = true }) => {
+const Header = () => {
+  const { user, logout } = useAuth();
   const location = useLocation();
   const history = useHistory();
   const [current, setCurrent] = useState(location.pathname);
@@ -56,34 +43,44 @@ const Header = ({ authUser = true }) => {
           <MenuItemGroup title='Vytvořit'>
             <Menu.Item key={ROUTES.ADMIN_CREATE_TEMPLATE}>
               <Link to={ROUTES.ADMIN_CREATE_TEMPLATE}>
-                <PlusCircleOutlined />
-                Vytvořit šablonu
+                <Space>
+                  <PlusCircleOutlined />
+                  Vytvořit šablonu
+                </Space>
               </Link>
             </Menu.Item>
             <Menu.Item key={ROUTES.ADMIN_CREATE_DIAGNOSIS}>
               <Link to={ROUTES.ADMIN_CREATE_DIAGNOSIS}>
-                <PlusCircleOutlined />
-                Vytvořit diagnózu
+                <Space>
+                  <PlusCircleOutlined />
+                  Vytvořit diagnózu
+                </Space>
               </Link>
             </Menu.Item>
           </MenuItemGroup>
           <MenuItemGroup title='Zobrazit'>
             <Menu.Item key={ROUTES.ADMIN_TEMPLATE_LIST}>
               <Link to={ROUTES.ADMIN_TEMPLATE_LIST}>
-                <OrderedListOutlined />
-                Zobrazit seznam šablon
+                <Space>
+                  <OrderedListOutlined />
+                  Zobrazit seznam šablon
+                </Space>
               </Link>
             </Menu.Item>
             <Menu.Item key={ROUTES.ADMIN_DIAGNOSIS_LIST}>
               <Link to={ROUTES.ADMIN_DIAGNOSIS_LIST}>
-                <FormOutlined />
-                Zobrazit seznam diagnóz
+                <Space>
+                  <FormOutlined />
+                  Zobrazit seznam diagnóz
+                </Space>
               </Link>
             </Menu.Item>
             <Menu.Item key={ROUTES.ADMIN_HISTORY}>
               <Link to={ROUTES.ADMIN_HISTORY}>
-                <HistoryOutlined />
-                Zobrazit historii testů
+                <Space>
+                  <HistoryOutlined />
+                  Zobrazit historii testů
+                </Space>
               </Link>
             </Menu.Item>
           </MenuItemGroup>
@@ -98,25 +95,40 @@ const Header = ({ authUser = true }) => {
           </Menu.Item>
         </SubMenu>
 
-        {!authUser ? (
+        {!user ? (
           <Menu.Item key={ROUTES.SIGN_IN}>
             <Link to={ROUTES.SIGN_IN}>
-              <LoginOutlined />
-              Přihlásit se
+              <Space>
+                <LoginOutlined />
+                Přihlásit se
+              </Space>
             </Link>
           </Menu.Item>
         ) : (
-          <Menu.Item
-            key='LOGOUT'
-            onClick={() => sessionStorage.setItem("authUser", false)}
-          >
-            <LogoutOutlined />
-            Odhlásit se
+          <Menu.Item key='LOGOUT' onClick={logout}>
+            <Space>
+              <LogoutOutlined />
+              Odhlásit se
+            </Space>
           </Menu.Item>
         )}
       </Menu>
     </StyledHeader>
   );
 };
-
 export default Header;
+
+const StyledHeader = styled(Layout.Header)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledLogo = styled(Logo)`
+  height: 40px;
+`;
+
+const StyledLogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`;

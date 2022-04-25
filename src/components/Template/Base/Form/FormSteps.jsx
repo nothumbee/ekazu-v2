@@ -1,6 +1,6 @@
 import React, { useState, memo } from "react";
 import { Steps, Button } from "antd";
-import "./FormSteps.scss";
+import styled from "styled-components";
 
 const { Step } = Steps;
 
@@ -8,19 +8,15 @@ const FormSteps = ({ steps = [], finishButton }) => {
   const [current, setCurrent] = useState(0);
   return (
     <div>
-      <Steps
-        current={current}
-        className='FormSteps'
-        onChange={(step) => setCurrent(step)}
-      >
+      <StyledSteps current={current} onChange={(step) => setCurrent(step)}>
         {steps.map((item) => (
           <Step key={item.title} title={item.title} />
         ))}
-      </Steps>
+      </StyledSteps>
 
       <div>{steps[current]?.content}</div>
 
-      <div className='FormSteps-actions'>
+      <StepAction>
         {current > 0 ? (
           <Button style={{ margin: "0 8px" }} onClick={() => setCurrent(current - 1)}>
             Předchozí
@@ -32,9 +28,18 @@ const FormSteps = ({ steps = [], finishButton }) => {
             Další
           </Button>
         ) : null}
-      </div>
+      </StepAction>
     </div>
   );
 };
-
 export default memo(FormSteps);
+
+const StyledSteps = styled(Steps)`
+  margin-bottom: 2rem !important;
+`;
+
+const StepAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

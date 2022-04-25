@@ -1,13 +1,8 @@
 import React from "react";
-
-// import { withAuthorization } from "../../components/Session";
-// import { compose } from 'recompose';
-// import { withRouter } from 'react-router';
-
-import TemplateList from "../../components/Template/TemplateList/TemplateList";
-import DiagnosisList from "../../components/Diagnosis/DiagnosisList";
-import DiagnosisAddForm from "../../components/Diagnosis/DiagnosisAddForm";
-import AdminHome from "../../components/Admin";
+import TemplateList from "../components/Template/TemplateList/TemplateList";
+import DiagnosisList from "../components/Diagnosis/DiagnosisList";
+import DiagnosisAddForm from "../components/Diagnosis/DiagnosisAddForm";
+import AdminHome from "../components/Admin/AdminHome";
 import { useLocation } from "react-router";
 import {
   ADMIN,
@@ -17,18 +12,15 @@ import {
   ADMIN_DUPLICATE_TEMPLATE,
   ADMIN_EDIT_TEMPLATE,
   ADMIN_TEMPLATE_LIST,
-} from "../../constants/routes";
-import TemplateAddForm from "../../containers/Templates/TemplateAddForm";
-import TemplateEditForm from "../../containers/Templates/TemplateEditForm";
-import TemplateDuplicateForm from "../../containers/Templates/TemplateDuplicateForm";
-
-const AdminPageBase = () => {
-  return <ActionDecision />;
-};
+} from "../constants/routes";
+import TemplateAddForm from "../containers/Templates/TemplateAddForm";
+import TemplateEditForm from "../containers/Templates/TemplateEditForm";
+import TemplateDuplicateForm from "../containers/Templates/TemplateDuplicateForm";
 
 const ActionDecision = () => {
   const location = useLocation();
   console.log("location", location);
+
   switch (location.pathname) {
     case ADMIN:
       return <AdminHome />;
@@ -56,9 +48,8 @@ const ActionDecision = () => {
   }
 };
 
-// const condition = authUser => !!authUser;
-// const AdminPage = withAuthorization(condition)(AdminPageBase);
-// for preview purposes removed authorization
-const AdminPage = AdminPageBase;
+const AdminPage = () => {
+  return <ActionDecision />;
+};
 
 export default AdminPage;

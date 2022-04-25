@@ -6,12 +6,12 @@ const axe = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-axe.interceptors.request.use(request => {
+axe.interceptors.request.use((request) => {
   console.log("Starting Request", request);
   return request;
 });
 
-axe.interceptors.response.use(response => {
+axe.interceptors.response.use((response) => {
   console.log("Response:", response);
   return response;
 });

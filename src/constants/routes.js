@@ -20,3 +20,5 @@ export const ADMIN_HISTORY = `${ADMIN}/history`;
 export const STUDENT = "/student";
 export const STUDENT_EXAM = `${STUDENT}/exam`;
 export const STUDENT_HISTORY = `${STUDENT}/history`;
+
+export const WRONG_USER_ROLE = "/wrong-user-role";
