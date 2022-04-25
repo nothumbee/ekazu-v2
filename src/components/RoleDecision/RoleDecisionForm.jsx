@@ -11,7 +11,7 @@ const RoleDecisionForm = () => {
   return (
     <div className={"RoleDecisionForm"}>
       <div className={"RoleDecisionForm-wrapper"}>
-        <div className={"RoleDecisionForm-title"}>Jste učitel nebo student?</div>
+        <div className={"RoleDecisionForm-title"}>Jste vyučující nebo student?</div>
         <Link to={STUDENT}>
           <div className={"RoleDecisionForm-item"}>
             <StudentIllustration className={"RoleDecisionForm-illustration"} />
@@ -21,7 +21,7 @@ const RoleDecisionForm = () => {
         <Link to={ADMIN}>
           <div className={"RoleDecisionForm-item"}>
             <TeacherIllustration className={"RoleDecisionForm-illustration"} />
-            <div className={"RoleDecisionForm-text"}>Učitel</div>
+            <div className={"RoleDecisionForm-text"}>Vyučující</div>
           </div>
         </Link>
       </div>

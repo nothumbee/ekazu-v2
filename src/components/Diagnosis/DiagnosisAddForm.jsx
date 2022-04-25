@@ -20,7 +20,7 @@ const DiagnosisAddForm = () => {
       .post("/admin/codelist/diagnosis", { definition: diagnosis })
       .then(() => {
         setIsSuccess(true);
-        message.success("Šablona úspěšně nahrána.");
+        message.success("Diagnóza úspěšně nahrána.");
         history.push(ADMIN_DIAGNOSIS_LIST);
       })
       .catch(() => setIsError(true));

@@ -9,9 +9,9 @@ const useExam = (overrideVisible = false) => {
     setTimeout(() => {
       setVisible(true);
       setExamining(false);
-      // send to server
+      // TODO send to server
     }, 1000);
-  }, [overrideVisible]);
+  }, []);
 
   const state = {
     examining,
