@@ -25,7 +25,7 @@ const ScreensRoot = () => {
         <div className={"inside"}>
           <Switch>
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
-            <Route path={ROUTES.STUDENT} component={StudentPage} />
+            <PrivateRoute path={ROUTES.STUDENT} component={StudentPage} />
             <PrivateRoute path={ROUTES.ADMIN} component={AdminPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

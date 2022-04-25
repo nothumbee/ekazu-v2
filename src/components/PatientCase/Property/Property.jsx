@@ -14,20 +14,21 @@ const Property = ({ property, visible: overrideVisibility = false }) => {
     if (!property.exam) {
       setVisible(true);
     } else setVisible(overrideVisibility);
-  }, [overrideVisibility]);
+  }, [overrideVisibility, property.exam, setVisible]);
 
-  const getPropertyBase = useMemo(
+  const propertyBase = useMemo(
     () =>
       ({
         [generatorTypes.IMAGES]: <Images property={property} visible={visible} />,
         [generatorTypes.RANGE]: <Range property={property} visible={visible} />,
         [generatorTypes.TEXT]: <Text property={property} visible={visible} />,
-      }[property.type])
+      }[property.type]),
+    [property, visible]
   );
 
   return (
     <>
-      {getPropertyBase}
+      {propertyBase}
       {property.exam && !visible && (
         <Button type='primary' onClick={handleExaminate}>
           Provést vyšetření

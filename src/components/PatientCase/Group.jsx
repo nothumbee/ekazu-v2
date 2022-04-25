@@ -8,14 +8,6 @@ import ExaminingModalLoading from "../Loading/ExaminingModalLoading";
 
 const { Title } = Typography;
 
-const StyledCard = styled(Card)`
-  &&& {
-    width: 100%;
-    background-color: #fafafa;
-    margin: 20px 0;
-  }
-`;
-
 const Group = ({ group }) => {
   const [{ visible, examining }, { handleExaminate, setVisible }] = useExam();
 
@@ -46,6 +38,14 @@ const Group = ({ group }) => {
     </>
   );
 };
+
+const StyledCard = styled(Card)`
+  &&& {
+    width: 100%;
+    background-color: #fafafa;
+    margin: 20px 0;
+  }
+`;
 
 export default Group;
 

@@ -14,7 +14,7 @@ const customPanelStyle = {
   overflow: "hidden",
 };
 
-const TemplateList = (props) => {
+const TemplateList = () => {
   const [templateList, setTemplateList] = useState([]);
   const history = useHistory();
 
@@ -30,8 +30,7 @@ const TemplateList = (props) => {
         });
     }
   };
-
-  useEffect(loadTemplateList, []);
+  useEffect(loadTemplateList, [templateList.length]);
 
   const editTemplate = (id) => history.push(`${ADMIN_EDIT_TEMPLATE}?id=${id}`);
   const duplicateTemplate = (id) => history.push(`${ADMIN_DUPLICATE_TEMPLATE}?id=${id}`);

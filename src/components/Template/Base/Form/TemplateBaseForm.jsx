@@ -49,7 +49,8 @@ const TemplateBaseForm = ({ data, handleSubmit }) => {
           form={form}
           name='template_form'
           onFinish={onSubmit}
-          // initialValues={INITIAL_STATE}
+          // TODO remove mock, connect to BE
+          initialValues={INITIAL_STATE}
           size='small'
         >
           <FormContext.Provider value={form}>
@@ -85,11 +86,6 @@ const TemplateBaseForm = ({ data, handleSubmit }) => {
                 // </Form.Item>
               }
             />
-            {/* <TitleInput /> */}
-            {/* <DiagnosisSelect diagnosisList={diagnosisList} /> */}
-            {/* <RequiredFields /> */}
-
-            {/* <GroupsList loading={loading} /> */}
           </FormContext.Provider>
         </Form>
       </Card>

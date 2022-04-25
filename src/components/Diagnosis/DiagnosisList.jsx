@@ -1,8 +1,7 @@
 import React from "react";
-
 import { Table, Card } from "antd";
 import Title from "antd/lib/typography/Title";
-import useDiagnosisList from "./useDiagnosisList";
+import { useDiagnosisList } from "./hooks";
 
 const DiagnosisList = () => {
   const { diagnosisList } = useDiagnosisList();

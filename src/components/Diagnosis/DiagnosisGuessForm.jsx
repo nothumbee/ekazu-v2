@@ -14,8 +14,10 @@ const DiagnosisGuessForm = ({ caseID, exams }) => {
 
   const handleSuccessFinishedCase = ({ wasRight }) => {
     if (wasRight) {
-      console.log("JE TO NA...", wasRight);
-    } else console.log("Spatne kamo :");
+      console.log("Spravne!", wasRight);
+    } else {
+      console.log("Bohuzel spatne :/");
+    }
   };
 
   return isChecking ? (

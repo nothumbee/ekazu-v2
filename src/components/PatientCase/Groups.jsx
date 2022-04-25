@@ -145,6 +145,10 @@ const Groups = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
     axe.get("student").then((response) => {
       console.log("RRRRRRR", response.data);
       // TODO prepare backend to return similar res to initial state

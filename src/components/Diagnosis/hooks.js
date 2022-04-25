@@ -32,7 +32,7 @@ export const useHandleFinishCase = ({ caseID, exams, handleSuccess }) => {
 
 export const useDiagnosisSelect = () => {
   const [selectedDiagnosis, setSelectedDiagnosis] = useState("");
-  const { diagnosisList } = useLoadDiagnosisList();
+  const { diagnosisList } = useDiagnosisList(true);
   const diagnosisSelect = (
     <select
       name='diagnosis'
@@ -53,16 +53,21 @@ export const useDiagnosisSelect = () => {
   return { diagnosisSelect, selectedDiagnosis };
 };
 
-const useLoadDiagnosisList = () => {
+const DIAGNOSIS_STUDENT_URL = "student/diagnosis";
+const DIAGNOSIS_ADMIN_URL = "/admin/codelist/diagnosis";
+
+export const useDiagnosisList = (isForStudent) => {
   const [diagnosisList, setDiagnosisList] = useState([]);
   const loadDiagnosisList = () => {
     axe
-      .get("student/diagnosis")
+      .get(isForStudent ? DIAGNOSIS_STUDENT_URL : DIAGNOSIS_ADMIN_URL)
       .then((response) => {
         setDiagnosisList(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  useEffect(loadDiagnosisList, []);
+  useEffect(loadDiagnosisList, [isForStudent]);
   return { diagnosisList };
 };
